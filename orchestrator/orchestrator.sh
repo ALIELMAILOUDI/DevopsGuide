@@ -32,7 +32,10 @@ run_step "Containerd installation" "./install_containerd.sh"
 # 3️⃣ Install Kubernetes (kubeadm, kubelet, kubectl)
 run_step "Kubernetes installation" "./install_k8s.sh"
 
-# 4️⃣ Reset & initialize Kubernetes cluster (optional)
+# 4️⃣ Install GitLab
+run_step "GitLab installation" "./install_gitlab.sh"
+
+# 5 Reset & initialize Kubernetes cluster (optional)
 if [ -f "./k8s-reset-init.sh" ]; then
     read -p "Do you want to reset & initialize Kubernetes cluster now? (y/n): " choice
     if [[ "$choice" =~ ^[Yy]$ ]]; then
@@ -42,10 +45,10 @@ if [ -f "./k8s-reset-init.sh" ]; then
     fi
 fi
 
-# 5️⃣ Install Helm
+# 6 Install Helm
 run_step "Helm installation" "./install_helm.sh"
 
-# 6️⃣ Install Traefik via Helm
+# 7 Install Traefik via Helm
 run_step "Traefik installation" "./install_traefik.sh"
 
 echo -e "\n${GREEN}=== All steps completed successfully! Your cluster is ready. ===${RESET}"
